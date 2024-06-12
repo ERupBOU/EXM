@@ -1,7 +1,7 @@
 import socket
 import ipaddress
 
-def (ip_or_domain):
+def ipck():
     try:
         ip_address = ipaddress.ip_address(ip_or_domain)
         ip_address = str(ip_address)
