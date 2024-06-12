@@ -41,7 +41,7 @@ def main_menu():
                 print(f"Operator: {phone_number_info['operator']}")
                 print(f"Time zones: {phone_number_info['time_zones']}")
         elif choice == "2":
-            continue
+            return
         elif choice == "3":
             print("Exiting the program...")
             break
