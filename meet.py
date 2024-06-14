@@ -3,7 +3,7 @@ import mutagen
 import magic
 import PyPDF2
 
-def metack(image_path):
+def get_image_metadata(image_path):
     with open(image_path, 'rb') as f:
         tags = exifread.process_file(f)
         metadata = {}
@@ -17,7 +17,7 @@ def get_audio_metadata(audio_path):
     if audio is not None:
         return dict(audio)
     else:
-        return {"error": "Не удалось прочитать метаданные аудиофайла."}
+        return {"error": "Failed to read audio file metadata."}
 
 def get_file_type(file_path):
     file_type = magic.from_file(file_path, mime=True)
@@ -36,50 +36,50 @@ def get_pdf_metadata(pdf_path):
 
 def main_menu():
     while True:
-        print("Выберите действие:")
-        print("1. Получить метаданные изображения (EXIF)")
-        print("2. Получить метаданные аудиофайла (Mutagen)")
-        print("3. Определить тип файла (python-magic)")
-        print("4. Получить метаданные PDF-файла (PyPDF2)")
-        print("5. Вернуться в главное меню")
-        print("6. Выйти")
+        print("Select an action:")
+        print("1. Get image metadata (EXIF)")
+        print("2. Get audio file metadata (Mutagen)")
+        print("3. Determine file type (python-magic)")
+        print("4. Get PDF metadata (PyPDF2)")
+        print("5. Return to main menu")
+        print("6. Exit")
 
-        choice = input("[?] Введите номер действия: ")
+        choice = input("[?] Enter the action number: ")
 
         if choice == "1":
-            image_path = input("Введите путь к изображению: ")
+            image_path = input("Enter the path to the image: ")
             image_metadata = get_image_metadata(image_path)
-            print("Метаданные изображения:")
+            print("Image metadata:")
             for key, value in image_metadata.items():
                 print(f"{key}: {value}")
         elif choice == "2":
-            audio_path = input("Введите путь к аудиофайлу: ")
+            audio_path = input("Enter the path to the audio file: ")
             audio_metadata = get_audio_metadata(audio_path)
             if "error" in audio_metadata:
                 print(audio_metadata["error"])
             else:
-                print("Метаданные аудиофайла:")
+                print("Audio file metadata:")
                 for key, value in audio_metadata.items():
                     print(f"{key}: {value}")
         elif choice == "3":
-            file_path = input("Введите путь к файлу: ")
+            file_path = input("Enter the path to the file: ")
             file_type = get_file_type(file_path)
-            print(f"Тип файла: {file_type}")
+            print(f"File type: {file_type}")
         elif choice == "4":
-            pdf_path = input("Введите путь к PDF-файлу: ")
+            pdf_path = input("Enter the path to the PDF file: ")
             pdf_metadata = get_pdf_metadata(pdf_path)
-            print("Метаданные PDF-файла:")
-            print(f"Автор: {pdf_metadata['author']}")
-            print(f"Название: {pdf_metadata['title']}")
-            print(f"Создатель: {pdf_metadata['creator']}")
-            print(f"Дата создания: {pdf_metadata['creation_date']}")
+            print("PDF file metadata:")
+            print(f"Author: {pdf_metadata['author']}")
+            print(f"Title: {pdf_metadata['title']}")
+            print(f"Creator: {pdf_metadata['creator']}")
+            print(f"Creation date: {pdf_metadata['creation_date']}")
         elif choice == "5":
             return
         elif choice == "6":
-            print("Выход из программы...")
+            print("Exiting the program...")
             break
         else:
-            print("Неверный выбор. Попробуйте еще раз.")
+            print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
     main_menu()
