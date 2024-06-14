@@ -1,5 +1,5 @@
 from ichp import ipck
-from meed import metack
+from meet import metack
 from chx11 import phoneck
 from smbe import booom
 from pasgen import passgen
