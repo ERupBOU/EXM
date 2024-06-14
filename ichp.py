@@ -39,6 +39,3 @@ def ipck():
         if choice.lower() == "n":
             print("[*] Returning to main menu...")
             return
-
-if __name__ == "__main__":
-    ipck()
