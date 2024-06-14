@@ -76,7 +76,7 @@ def main_menu():
         elif choice == 6:
             print("error")
         elif choice == 7:
-            passgen()
+            run_password_generator()
         elif choice == 99:
             clear_console()
             print(Fore.RED + "Exiting..." + Style.RESET_ALL)
