@@ -1,6 +1,5 @@
 exifread
 mutagen
-python-magic
 PyPDF2
 ipaddress
 phonenumbers
