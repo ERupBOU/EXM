@@ -1,49 +1,44 @@
 import socket
 import ipaddress
 
-def ipck(ip_or_domain):
-    try:
-        ip_address = ipaddress.ip_address(ip_or_domain)
-        ip_address = str(ip_address)
-    except ValueError:
-        try:
-            ip_address = socket.gethostbyname(ip_or_domain)
-        except socket.gaierror:
-            return {"error": f"Failed to determine IP address from '{ip_or_domain}'"}
-
-    try:
-        hostname, aliases, addresses = socket.gethostbyaddr(ip_address)
-        return {
-            "ip": ip_address,
-            "hostname": hostname,
-            "aliases": aliases,
-            "addresses": addresses
-        }
-    except socket.herror:
-        return {"error": f"Failed to get information for IP address '{ip_address}'"}
-
-def main():
+def ipck():
     while True:
-        print("\nChoose an action:")
-        print("1. Get IP address information")
-        print("2. Exit")
-
-        choice = input("[?] Enter the number of the action: ")
-
-        if choice == "1":
-            ip_or_domain = input("Enter an IP address or domain name: ")
-            ip_info = ipck(ip_or_domain)
-            if "error" in ip_info:
-                print(ip_info["error"])
-            else:
-                print(f"IP Address: {ip_info['ip']}")
-                print(f"Hostname: {ip_info['hostname']}")
-                print(f"Aliases: {', '.join(ip_info['aliases'])}")
-                print(f"Addresses: {', '.join(ip_info['addresses'])}")
-        elif choice == "2":
+        try:
+            ipadr = input("[?] ip > ")
+            
+            ip_info = ipaddress.ip_address(ipadr)
+            print(f"[+] IP Address: {ip_info.compressed}")
+            print(f"[+] IP Version: {ip_info.version}")
+            print(f"[+] IP Type: {ip_info.is_private}")
+           
+            try:
+                hostname = socket.gethostbyaddr(ipadr)[0]
+                print(f"[+] Hostname: {hostname}")
+            except socket.herror:
+                print("[-] Unable to resolve hostname")
+           
+            try:
+                port = int(input("[?] Port (Press Enter to skip) > ") or "0")
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(5)
+                result = sock.connect_ex((ipadr, port))
+                if result == 0:
+                    print(f"[+] Port {port} is open")
+                else:
+                    print(f"[-] Port {port} is closed")
+                sock.close()
+            except ValueError:
+                print("[-] Invalid port number")
+        except ValueError:
+            print("[-] Invalid IP address")
+        except KeyboardInterrupt:
+            print("\n[!] Exiting...")
+            break
+        
+        choice = input("[?] Do you want to check another IP? (y/n) ")
+        if choice.lower() == "n":
+            print("[*] Returning to main menu...")
             return
-        else:
-            print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
-    main()
+    ipck()
