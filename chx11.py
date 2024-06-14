@@ -1,7 +1,7 @@
 import phonenumbers
 from phonenumbers import geocoder, carrier, timezone
 
-def phonck():
+def phoneck():
     while True:
         phonnum = input("[?] Number >")
         try:
