@@ -1,7 +1,7 @@
 from ichp import ipck
 from meet import metack
 from chx11 import phoneck
-from password_generator import generate_password, get_password_options, run_password_generator
+from pasgen import generate_password, get_password_options, run_password_generator
 import os
 from colorama import Fore, Style
 
