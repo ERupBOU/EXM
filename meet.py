@@ -29,7 +29,7 @@ def get_pdf_metadata(pdf_path):
             "creation_date": metadata.creation_date
         }
 
-def main_menu():
+def metack():
     while True:
         print("Select an action:")
         print("1. Get image metadata (EXIF)")
