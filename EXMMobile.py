@@ -2,11 +2,9 @@ from ichp import ipck
 from meed import metack
 from chx11 import phoneck
 from smbe import booom
-from proxy_scraper import get_proxies
-from usserc import userck
+from pasgen import passgen
 import os
 from colorama import Fore, Style
-from setingsc import cfgsck
 
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -47,14 +45,13 @@ def menu_input():
 
        > EXMMobile <
 
-1. IP Checker
-2. Ports scan
-3. Phone Checker
-4. Metadata img
-5. Bomber SMS
-6. Proxy Generator
-7. Password Generator
-8. Settings
+1. IP Checker [work]
+2. Ports scan (ip checker)
+3. Phone Checker [work]
+4. Metadata img [work]
+5. Bomber SMS [work]
+6. Proxy Generator [ not work ]
+7. Password Generator [work]
 ''')
 
 def main_menu():
@@ -70,7 +67,7 @@ def main_menu():
         if choice == 1:
             ipck()
         elif choice == 2:
-            pscan()
+            ipck
         elif choice == 3:
             phoneck()
         elif choice == 4:
@@ -78,13 +75,9 @@ def main_menu():
         elif choice == 5:
             booom()
         elif choice == 6:
-proxy_list = get_proxies()
-for proxy in proxy_list:
-    print(proxy)
+            print("error")
         elif choice == 7:
-            userck()
-        elif choice == 8:
-            cfgsck()
+            passgen()
         elif choice == 99:
             clear_console()
             print(Fore.RED + "Exiting..." + Style.RESET_ALL)
