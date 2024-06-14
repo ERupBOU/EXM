@@ -1,7 +1,6 @@
 from ichp import ipck
 from meet import metack
 from chx11 import phoneck
-from smbe import booom
 from pasgen import passgen
 import os
 from colorama import Fore, Style
