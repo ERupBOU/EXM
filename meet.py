@@ -1,6 +1,5 @@
 import exifread
 import mutagen
-import magic
 import PyPDF2
 
 def get_image_metadata(image_path):
@@ -19,10 +18,6 @@ def get_audio_metadata(audio_path):
     else:
         return {"error": "Failed to read audio file metadata."}
 
-def get_file_type(file_path):
-    file_type = magic.from_file(file_path, mime=True)
-    return file_type
-
 def get_pdf_metadata(pdf_path):
     with open(pdf_path, 'rb') as file:
         pdf_reader = PyPDF2.PdfReader(file)
@@ -39,10 +34,9 @@ def main_menu():
         print("Select an action:")
         print("1. Get image metadata (EXIF)")
         print("2. Get audio file metadata (Mutagen)")
-        print("3. Determine file type (python-magic)")
-        print("4. Get PDF metadata (PyPDF2)")
-        print("5. Return to main menu")
-        print("6. Exit")
+        print("3. Get PDF metadata (PyPDF2)")
+        print("4. Return to main menu")
+        print("5. Exit")
 
         choice = input("[?] Enter the action number: ")
 
@@ -62,10 +56,6 @@ def main_menu():
                 for key, value in audio_metadata.items():
                     print(f"{key}: {value}")
         elif choice == "3":
-            file_path = input("Enter the path to the file: ")
-            file_type = get_file_type(file_path)
-            print(f"File type: {file_type}")
-        elif choice == "4":
             pdf_path = input("Enter the path to the PDF file: ")
             pdf_metadata = get_pdf_metadata(pdf_path)
             print("PDF file metadata:")
@@ -73,9 +63,9 @@ def main_menu():
             print(f"Title: {pdf_metadata['title']}")
             print(f"Creator: {pdf_metadata['creator']}")
             print(f"Creation date: {pdf_metadata['creation_date']}")
-        elif choice == "5":
+        elif choice == "4":
             return
-        elif choice == "6":
+        elif choice == "5":
             print("Exiting the program...")
             break
         else:
