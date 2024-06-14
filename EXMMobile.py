@@ -2,7 +2,7 @@ from ichp import ipck
 from meed import metack
 from chx11 import phoneck
 from smbe import booom
-from prxs import gensk
+from proxy_scraper import get_proxies
 from usserc import userck
 import os
 from colorama import Fore, Style
@@ -78,7 +78,9 @@ def main_menu():
         elif choice == 5:
             booom()
         elif choice == 6:
-            gensk()
+proxy_list = get_proxies()
+for proxy in proxy_list:
+    print(proxy)
         elif choice == 7:
             userck()
         elif choice == 8:
