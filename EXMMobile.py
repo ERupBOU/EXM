@@ -1,7 +1,6 @@
 from ichp import ipck
 from meed import metack
 from chx11 import phoneck
-from psck import pscan
 from smbe import booom
 from prxs import gensk
 from usserc import userck
